@@ -59,3 +59,42 @@ let printQuantity aOrderQty =
     match aOrderQty with
     | UnitQuantity uQty -> printfn "Units: %d" uQty
     | KilogramQuantity kgQty -> printfn "Kilograms: %f" kgQty
+
+
+// 型の合成によるドメインモデルの構築
+type CheckNumber = CheckNumber of string
+
+type CardNumber = CardNumber of string
+type CardType = Visa | Mastercard
+type CreditCardInfo = {
+    CardType: CardType
+    CardNumber: CardNumber
+}
+
+type PaymentMethod = 
+    | Cash
+    | Check of CheckNumber
+    | Card of CreditCardInfo
+
+type PaymentAmount = PaymentAmount of decimal
+type Currency = EUR | USD
+type Payment = {
+    Amount: PaymentAmount
+    Currency: Currency
+    Method: PaymentMethod
+}
+
+// type PayInvoice = UnpaidInvoice -> Payment -> PaidInvoice
+
+// 省略可能な値
+type PersonalInfo = {
+    FirstName: string
+    LastName: string
+    Age: int option
+}
+
+// エラー
+type PayInvoiceError = UnpaidInvoice -> Payment -> Result<int, string>
+
+// 値を返さない
+type SaveCustomer = PersonalInfo -> unit
