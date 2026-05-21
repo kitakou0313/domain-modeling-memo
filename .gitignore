@@ -165,3 +165,5 @@ Desktop.ini
 *.pidb
 *.svclog
 mono_crash.*
+
+.fake

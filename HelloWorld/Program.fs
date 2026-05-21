@@ -11,7 +11,7 @@ let squarePlusOne x =
 let areEqual x y =
     x = y
 
-type AppleVariety = int
+type AppleVariety = AppleVariety of int
 type BananaVariety = int
 type CherryVariety = int
 
@@ -128,3 +128,30 @@ pringList1 []
 pringList1 [1]
 pringList1 [2;3]
 pringList1 [4;5;6]
+
+// 単純な値に対応する型の定義
+// 型の名前 = ケース名 of ...で定義
+type CustomerId = | CustomerId of int
+
+// ケース名がコンストラクタ関数名になる
+let customerId = CustomerId 123
+// 他のWrapper型との値の混合を防止できる
+type OrderId = | OrderId of int 
+let orderId = OrderId 123
+//(orderId == customerId) // 型の検証でエラーになる
+// 単一ケース共用体は分解して利用する
+let (CustomerId id ) = customerId
+
+// 型のエイリアスと単一ケース共用体の違い
+//// 型エイリアスの場合、同じ型に対するエイリアスは同一の型扱いになる -> 型システムによる安全性を利用できない
+type TypeAlias1 = int
+type TypeAlias2 = int
+let typeAlias1: TypeAlias1 = 123
+let typeAlias2: TypeAlias2 = 123
+typeAlias1 = typeAlias2
+/// 単一ケース共用体の場合、同じ型に対する単一ケース共用体は異なる型扱いになる -> 型システムによる安全性を利用できる
+type SingleCaseDU1 = SingleCaseDU1 of int
+type SingleCaseDU2 = SingleCaseDU2 of int
+let singleCaseDU1 = SingleCaseDU1 123
+let singleCaseDU2 = SingleCaseDU2 123
+singleCaseDU1 = singleCaseDU2
