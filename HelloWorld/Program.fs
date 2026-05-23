@@ -155,3 +155,8 @@ type SingleCaseDU2 = SingleCaseDU2 of int
 let singleCaseDU1 = SingleCaseDU1 123
 let singleCaseDU2 = SingleCaseDU2 123
 singleCaseDU1 = singleCaseDU2
+
+type UnvalidatedOrder = UnvalidatedOrder of string
+type ValidateOrder = ValidateOrder of string
+type OrderValidationError = OrderValidationError of string
+type validateOrder = UnvalidatedOrder -> Result<ValidateOrder, OrderValidationError>
