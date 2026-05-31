@@ -1,4 +1,4 @@
-namespace OrderTaking.Domain
+namespace OrderTakingDomain
 
 // 値オブジェクト
 // 単一ケース共用体で定義する
