@@ -6,7 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="*.fs" />
+    <Compile Include="DomainModel.fs" />
+    <Compile Include="Chap6.fs" />
+    <Compile Include="Chap6Order.fs" />
+    <Compile Include="Program.fs" />
   </ItemGroup>
 
 </Project>
