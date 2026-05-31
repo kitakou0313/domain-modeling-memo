@@ -1,4 +1,4 @@
-namespace OrderTakingDomain
+namespace OrderTaking.Domain
 
 // 値オブジェクト
 // 単一ケース共用体で定義する
@@ -31,6 +31,7 @@ type OrderLine = {
     OrderId: OrderId
     ProductCode: ProductCode
     OrderQuantity: OrderQuantity
+    Price: Price
 }
 
 type Order = {
@@ -38,6 +39,28 @@ type Order = {
     CustomerId: CustomerId
     ShippingAddress: ShippingAddress
     BillingAddress: BillingAddress
-    OrderLines: Order
+    OrderLines: OrderLine list
     Price: Price
 }
+
+type UnvalidatedOrder = {
+    OrderId: string
+    CustomerInfo: string
+    ShippingAddress: string
+}
+
+type PlaceOrderEvents = {
+    AcknoledgementSent: string
+    OrderPlaced: bool
+    BillableOrderPlaced: bool
+}
+
+type ValidationError = {
+    FieldName: string
+    ErrorDescription: string
+}
+type PlaceOrderError = 
+    | ValidationError of ValidationError list
+
+type PlaceOrder = 
+    UnvalidatedOrder -> Result<PlaceOrderEvents, PlaceOrderError>
